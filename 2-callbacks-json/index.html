@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Biblioteca Digital</h1>
+            <p class="subtitle">Gestión de inventario de libros</p>
+        </header>
+
+        <main>
+            <section class="controls">
+                <button id="mostrarBtn">Mostrar Libros</button>
+                <button id="agregarBtn">Agregar Libro</button>
+                <div class="form-container" id="formContainer" style="display: none;">
+                    <form id="libroForm">
+                        <input type="text" id="titulo" placeholder="Título" required>
+                        <input type="text" id="autor" placeholder="Autor" required>
+                        <input type="text" id="genero" placeholder="Género" required>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="disponible" checked>
+                            <label for="disponible">Disponible</label>
+                        </div>
+                        <button type="submit">Guardar</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="inventario">
+                <h2>Inventario de Libros</h2>
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Cargando...</p>
+                </div>
+                <div id="librosContainer" class="libros-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="project.js"></script>
+</body>
+
+</html>
