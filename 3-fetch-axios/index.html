@@ -1,19 +1,56 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consumo de APIs</title>
-    <!-- Incluyendo axios para poderlo utilizar-->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <h1>Información de Personajes</h1>
-    <button id="fetch-btn">Obtener con Fetch</button>
-    <button id="axios-btn">Obtener con Axios</button>
-    <div id="data-container"></div>
-    <!-- <script src="app.js"></script> -->
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-robot"></i> Información de Personajes</h1>
+            <p class="subtitle">Comparando Fetch vs Axios</p>
+        </header>
+
+        <main>
+            <div class="button-group">
+                <button id="fetch-btn" class="btn axios-btn">
+                    <i class="fas fa-bolt"></i> Obtener con Fetch
+                </button>
+                <button id="axios-btn" class="btn fetch-btn">
+                    <i class="fas fa-code"></i> Obtener con Axios
+                </button>
+            </div>
+
+            <div class="api-info">
+                <div class="api-card">
+                    <h3><i class="fas fa-plug"></i> API Rick and Morty</h3>
+                    <p>Usada con Fetch</p>
+                </div>
+                <div class="api-card">
+                    <h3><i class="fas fa-jedi"></i> API Star Wars</h3>
+                    <p>Usada con Axios</p>
+                </div>
+            </div>
+
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando personajes...</p>
+            </div>
+
+            <div id="data-container" class="characters-grid"></div>
+        </main>
+
+        <footer>
+            <p>Práctica de consumo de APIs con JavaScript</p>
+        </footer>
+    </div>
+
     <script src="./project.js"></script>
 </body>
 

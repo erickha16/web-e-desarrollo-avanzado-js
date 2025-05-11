@@ -17,12 +17,27 @@ Familiarízate con las rutas que usarás, como `/character` para obtener una lis
 7. Crea una función para mostrar los personajes en el contenedor `data-container`.
 8. Por ejemplo, podrías mostrar el nombre y la imagen de cada personaje.
 */
+// -------------------------------------------- Proyecto Fetch y Axios -------------------------------------------- \\
 
 // Implementa las Solicitudes con Fetch
 const fetchBtn = document.getElementById("fetch-btn");
+const axiosBtn = document.getElementById("axios-btn");
 const dataContainer = document.getElementById("data-container");
+const loading = document.getElementById("loading");
+
+// Mostrar/ocultar loading
+function showLoading() {
+  loading.classList.add("active");
+  dataContainer.innerHTML = "";
+}
+
+function hideLoading() {
+  loading.classList.remove("active");
+}
 
 fetchBtn.addEventListener("click", () => {
+  showLoading();
+
   fetch("https://rickandmortyapi.com/api/character")
     .then((response) => {
       if (!response.ok) {
@@ -31,46 +46,84 @@ fetchBtn.addEventListener("click", () => {
       return response.json();
     })
     .then((data) => {
-      //Renderizar datos en el contenedor usando `data.results` para iterar sobre los personajes obtenidos.
-      renderCharacters(data.results);
+      hideLoading();
+      renderCharacters(data.results, "Rick and Morty");
     })
     .catch((error) => {
+      hideLoading();
       console.error("Error:", error);
-      dataContainer.textContent = "Hubo un error al obtener los datos.";
+      dataContainer.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Hubo un error al obtener los datos de Rick and Morty</p>
+                </div>
+            `;
     });
 });
 
 // Implementa las Solicitudes con Axios
-
-// 1. Instala Axios o inclúyelo mediante una CDN:
-//   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-// 2. Escribe una función que utilice Axios para obtener los datos y manejarlos de manera similar a `fetch`.
-
-const axiosBtn = document.getElementById("axios-btn");
-
 axiosBtn.addEventListener("click", () => {
+  showLoading();
+
   axios
     .get("https://www.swapi.tech/api/people")
     .then((response) => {
-      const data = response.data;
-      // Renderizar datos en el contenedor
-      renderCharacters(data.results);
+      hideLoading();
+      // La API de Star Wars tiene una estructura diferente
+      const characters = response.data.results.map((char) => ({
+        name: char.name,
+      }));
+      renderCharacters(characters, "Star Wars");
     })
     .catch((error) => {
+      hideLoading();
       console.error("Error:", error);
-      dataContainer.textContent = "Hubo un error al obtener los datos.";
+      dataContainer.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Hubo un error al obtener los datos de Star Wars</p>
+                </div>
+            `;
     });
 });
 
-// Función de renderizado:
-function renderCharacters(characters) {
+// Función de renderizado mejorada
+function renderCharacters(characters, source) {
   dataContainer.innerHTML = "";
+
+  if (!characters || characters.length === 0) {
+    dataContainer.innerHTML = `
+            <div class="empty-message">
+                <i class="fas fa-info-circle"></i>
+                <p>No se encontraron personajes</p>
+            </div>
+        `;
+    return;
+  }
+
   characters.forEach((character) => {
     const characterElement = document.createElement("div");
+    characterElement.className = "character-card";
     characterElement.innerHTML = `
-      <h3>${character.name}</h3>
-      <img src="${character.image}" alt="${character.name}">
-    `;
+            <div class="character-header">
+                <h3>${character.name}</h3>
+                <span class="badge ${
+                  source === "Rick and Morty" ? "rick" : "starwars"
+                }">
+                    ${source}
+                </span>
+            </div>
+            <img src="${character.image}" alt="${
+      character.name
+    }" onerror="this.src='https://via.placeholder.com/300x250?text=Imagen+no+disponible'">
+        `;
     dataContainer.appendChild(characterElement);
+  });
+
+  // Animación de aparición
+  const cards = document.querySelectorAll(".character-card");
+  cards.forEach((card, index) => {
+    card.style.animation = `fadeIn 0.5s ease forwards ${index * 0.1}s`;
+    card.style.opacity = "0";
   });
 }
