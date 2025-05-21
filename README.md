@@ -24,6 +24,6 @@ web-e-desarrollo-avanzado-js/
 
 ## Prácticas desplegadas
 
-Para poder ver el funcionamiento de cada una de estas páginas, puedes visitar el siguiente sitio: [Prácticas desplegadas](link).
+Para poder ver el funcionamiento de cada una de estas páginas, puedes visitar el siguiente sitio: [Prácticas desplegadas](https://erickha16.github.io/web-e-desarrollo-avanzado-js/).
 
 La página se enucnetra desplegada desde Github Pages.
