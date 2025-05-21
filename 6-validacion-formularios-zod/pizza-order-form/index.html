@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Pizza</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Ordena tu Pizza 🍕</h1>
+    <form id="pizzaForm">
+        <input type="text" id="name" placeholder="Nombre" required />
+        <label for="size">Tamaño:</label>
+        <select id="size" required>
+            <option value="">Selecciona un tamaño</option>
+            <option value="pequeña">Pequeña</option>
+            <option value="mediana">Mediana</option>
+            <option value="grande">Grande</option>
+        </select>
+        <fieldset>
+            <legend>Ingredientes Extras:</legend>
+            <label><input type="checkbox" name="ingredients" value="pepperoni"> Pepperoni</label>
+            <label><input type="checkbox" name="ingredients" value="champiñones"> Champiñones</label>
+            <label><input type="checkbox" name="ingredients" value="aceitunas"> Aceitunas</label>
+            <label><input type="checkbox" name="ingredients" value="extraQueso"> Extra Queso</label>
+        </fieldset>
+        <input type="number" id="quantity" placeholder="Cantidad" min="1" max="10" required />
+        <button type="submit">Realizar Pedido</button>
+    </form>
+    <p id="errorMessage" class="error"></p>
+    <script src="https://cdn.jsdelivr.net/npm/zod@3.21.4/lib/index.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
