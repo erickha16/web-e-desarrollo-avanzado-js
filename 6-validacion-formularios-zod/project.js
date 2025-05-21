@@ -41,15 +41,16 @@ document.getElementById("registerForm").addEventListener("submit", (event) => {
 
   // Validamos los datos con Zod
   //Opción 1, usando un try/catch
+  const errors = document.getElementById("errors"); //Acceso al bloque de errores
   try {
     // Usa el método correcto de Zod para validar el esquema.
     registerSchema.parse(formData);
+    errors.style.display = "none"; // Oculta el contenedor de errores
     alert("¡Registro exitoso!");
   } catch (error) {
     //Muestra los mensajes de error en la página.
-    document.getElementById("errors").textContent = error.errors
-      .map((e) => e.message)
-      .join(", ");
+    errors.style.display = "block"; // Muestra el contenedor de errores
+    errors.textContent = error.errors.map((e) => e.message).join(", ");
   }
 
   //Opción 2, obteniendo un mensaje de error específico:
